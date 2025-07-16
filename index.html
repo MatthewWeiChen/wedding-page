@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erika & Matthew</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1600&h=1200&fit=crop&q=80') center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: 4.5rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+      animation: slideInLeft 1s ease-out 0.3s both;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .hero .date {
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      animation: slideInRight 1s ease-out 0.6s both;
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .hero .location {
+      font-size: 1.1rem;
+      font-weight: 300;
+      opacity: 0.9;
+      animation: fadeIn 1s ease-out 0.9s both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .nav.visible {
+      transform: translateY(0);
+    }
+
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      padding: 0 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: #333;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 1px;
+      background: #333;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Sections */
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      margin-bottom: 3rem;
+      color: #333;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .section-title.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Photos Section - Carousel */
+    .photos-section {
+      background: #fafafa;
+      overflow: hidden;
+    }
+
+    .photo-carousel {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 2px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      height: 500px;
+    }
+
+    .carousel-slides {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100%;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+      display: flex;
+    }
+
+    .slide-image {
+      width: 60%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-content {
+      width: 40%;
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: white;
+    }
+
+    .slide-title {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .slide-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-date {
+      font-size: 0.9rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Carousel Navigation */
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+    .carousel-nav:hover {
+      background: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel-prev {
+      left: -10px;
+    }
+
+    .carousel-next {
+      right: -10px;
+    }
+
+    .carousel-nav svg {
+      width: 20px;
+      height: 20px;
+      color: #333;
+    }
+
+    /* Carousel Indicators */
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 2rem;
+      background: white;
+      border-top: 1px solid #eee;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ddd;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .indicator.active {
+      background: #333;
+      transform: scale(1.2);
+    }
+
+    /* Carousel Counter */
+    .carousel-counter {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      z-index: 10;
+    }
+
+    /* Story Section */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .story-text {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.8s ease;
+    }
+
+    .story-text.animate {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .story-text h2 {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: 2.5rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .story-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .story-image {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: all 0.8s ease;
+    }
+
+    .story-image.animate {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .story-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border: 1px solid #eee;
+    }
+
+    /* Details Section */
+    .details-section {
+      background: #fafafa;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+
+    .detail-item {
+      background: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      border: 1px solid #eee;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .detail-item.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .detail-item:hover {
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .detail-item h3 {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: #333;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .detail-item p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-item .time {
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* RSVP Section */
+    .rsvp-section {
+      background: white;
+    }
+
+    .rsvp-form {
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .rsvp-form.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      font-family: 'Times New Roman', Times, serif;
+      background: #fafafa;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #333;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .radio-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .radio-option {
+      border: 1px solid #ddd;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #fafafa;
+    }
+
+    .radio-option:hover {
+      border-color: #333;
+      background: white;
+    }
+
+    .radio-option.selected {
+      border-color: #333;
+      background: #333;
+      color: white;
+    }
+
+    .radio-option input {
+      display: none;
+    }
+
+    .radio-option label {
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: #333;
+      color: white;
+      border: none;
+      padding: 1.2rem;
+      font-size: 0.9rem;
+      font-family: 'Times New Roman', Times, serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      background: #555;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+      background: #fafafa;
+      border: 1px solid #ddd;
+      animation: slideIn 0.6s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .success-message h3 {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero .date {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-link {
+        font-size: 0.85rem;
+      }
+
+      .carousel-container {
+        height: 400px;
+      }
+
+      .carousel-slide {
+        flex-direction: column;
+      }
+
+      .slide-image {
+        width: 100%;
+        height: 60%;
+      }
+
+      .slide-content {
+        width: 100%;
+        height: 40%;
+        padding: 1.5rem;
+      }
+
+      .slide-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .slide-description {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .carousel-nav {
+        width: 40px;
+        height: 40px;
+      }
+
+      .carousel-nav svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .details-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .radio-group {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+    }
+
+    /* Elegant divider */
+    .divider {
+      width: 100px;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem auto;
+    }
+
+    /* Subtle animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Erika & Matthew</h1>
+      <p class="date">August 16, 2025</p>
+      <div class="divider"></div>
+      <p class="location">Laguna Hills, California</p>
+    </div>
+  </section>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#photos" class="nav-link">Photos</a></li>
+        <li><a href="#story" class="nav-link">Our Story</a></li>
+        <li><a href="#details" class="nav-link">Details</a></li>
+        <li><a href="#rsvp" class="nav-link">RSVP</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Photos Section -->
+  <section class="section photos-section" id="photos">
+    <div class="container">
+      <h2 class="section-title">Our Journey</h2>
+      <div class="photo-carousel">
+        <div class="carousel-container">
+          <div class="carousel-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">6</span>
+          </div>
+
+          <div class="carousel-slides" id="carouselSlides">
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&h=500&fit=crop&q=80"
+                alt="The Proposal" class="slide-image">
+              <div class="slide-content">
+                <h3 class="slide-title">The Proposal</h3>
+                <p class="slide-description">A perfect moment during our sunset hike in Marin County. Michael had been
+                  carrying the ring for two months, waiting for the right time.</p>
+                <p class="slide-date">March 2024</p>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1594736797933-d0fa71d3494f?w=600&h=500&fit=crop&q=80"
+                alt="Date Night" class="slide-image">
+              <div class="slide-content">
+                <h3 class="slide-title">Date Night</h3>
+                <p class="slide-description">Celebrating our engagement with a romantic dinner in Napa Valley. The
+                  beginning of our wedding planning adventure.</p>
+                <p class="slide-date">April 2024</p>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=500&fit=crop&q=80"
+                alt="Adventure" class="slide-image">
+              <div class="slide-content">
+                <h3 class="slide-title">Weekend Adventure</h3>
+                <p class="slide-description">Our getaway to Big Sur, where we love to disconnect from the world and
+                  enjoy each other's company in nature.</p>
+                <p class="slide-date">July 2024</p>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&h=500&fit=crop&q=80"
+                alt="Celebration" class="slide-image">
+              <div class="slide-content">
+                <h3 class="slide-title">Birthday Celebration</h3>
+                <p class="slide-description">Sarah's surprise birthday party that Michael planned. The joy on her face
+                  made all the secret planning worth it.</p>
+                <p class="slide-date">September 2024</p>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&h=500&fit=crop&q=80"
+                alt="Holidays" class="slide-image">
+              <div class="slide-content">
+                <h3 class="slide-title">First Christmas</h3>
+                <p class="slide-description">Our first Christmas together in our new home. Creating traditions that
+                  we'll carry into our married life.</p>
+                <p class="slide-date">December 2024</p>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&h=500&fit=crop&q=80"
+                alt="Wine Tasting" class="slide-image">
+              <div class="slide-content">
+                <h3 class="slide-title">Wine Country</h3>
+                <p class="slide-description">Exploring Sonoma County and tasting wines for our wedding reception.
+                  Research has never been so enjoyable!</p>
+                <p class="slide-date">February 2025</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-nav carousel-prev" id="prevBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+          </button>
+
+          <button class="carousel-nav carousel-next" id="nextBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="carousel-indicators" id="carouselIndicators">
+          <div class="indicator active" data-slide="0"></div>
+          <div class="indicator" data-slide="1"></div>
+          <div class="indicator" data-slide="2"></div>
+          <div class="indicator" data-slide="3"></div>
+          <div class="indicator" data-slide="4"></div>
+          <div class="indicator" data-slide="5"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="section" id="story">
+    <div class="container">
+      <h2 class="section-title">Our Story</h2>
+      <div class="story-grid">
+        <div class="story-text">
+          <h2>How We Met</h2>
+          <p>We first crossed paths on a rainy Tuesday at a small coffee shop in downtown San Francisco. Sarah was
+            pretending to grade papers but actually people-watching, while Michael was deep in a Hemingway novel.</p>
+          <p>Three years later, during a sunset hike in Marin County, Michael got down on one knee with a ring he'd been
+            carrying for two months, waiting for the perfect moment.</p>
+          <div class="divider"></div>
+          <p>Now we're ready to start our next adventure together, and we can't wait to celebrate with all the people we
+            love most.</p>
+        </div>
+        <div class="story-image">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&h=600&fit=crop&q=80"
+            alt="Erika & Matthew">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details Section -->
+  <section class="section details-section" id="details">
+    <div class="container">
+      <h2 class="section-title">Wedding Details</h2>
+      <div class="details-grid">
+        <div class="detail-item">
+          <h3>Ceremony</h3>
+          <p class="time">4:00 PM</p>
+          <p>Garden Pavilion</p>
+          <p>Silverado Resort & Spa</p>
+          <p>1600 Atlas Peak Road</p>
+          <p>Napa, CA 94558</p>
+          <div class="divider"></div>
+          <p><em>Cocktail Attire Requested</em></p>
+        </div>
+        <div class="detail-item">
+          <h3>Reception</h3>
+          <p class="time">6:00 PM</p>
+          <p>Grand Ballroom</p>
+          <p>Dinner & Dancing</p>
+          <p>Open Bar</p>
+          <div class="divider"></div>
+          <p><em>Same Location</em></p>
+        </div>
+       
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP Section -->
+  <section class="section rsvp-section" id="rsvp">
+    <div class="container">
+      <h2 class="section-title">RSVP</h2>
+      <div class="rsvp-form">
+        <form id="rsvpForm">
+          <div class="form-group">
+            <label for="guestName">Full Name</label>
+            <input type="text" id="guestName" name="guestName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label>Will you be attending?</label>
+            <div class="radio-group">
+              <div class="radio-option" data-value="yes">
+                <input type="radio" id="attendingYes" name="attending" value="yes" required>
+                <label for="attendingYes">Accepts with Pleasure</label>
+              </div>
+              <div class="radio-option" data-value="no">
+                <input type="radio" id="attendingNo" name="attending" value="no" required>
+                <label for="attendingNo">Regretfully Declines</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" id="guestCountGroup" style="display: none;">
+            <label for="guestCount">Number of Guests</label>
+            <select id="guestCount" name="guestCount">
+              <option value="1">1 Guest</option>
+              <option value="2">2 Guests</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="dietaryGroup" style="display: none;">
+            <label for="dietary">Dietary Restrictions</label>
+            <textarea id="dietary" name="dietary" rows="3"
+              placeholder="Please share any dietary restrictions or allergies..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message for the Couple</label>
+            <textarea id="message" name="message" rows="4"
+              placeholder="Share your well wishes or a favorite memory..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Response</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+          <h3>Thank You</h3>
+          <div class="divider"></div>
+          <p>Your response has been received. We look forward to celebrating with you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      initializeWebsite();
+    });
+
+    function initializeWebsite() {
+      setupScrollAnimations();
+      setupNavigation();
+      setupRSVP();
+      setupSmoothScrolling();
+      setupCarousel();
+    }
+
+    function setupCarousel() {
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.carousel-slide');
+      const indicators = document.querySelectorAll('.indicator');
+      const slidesContainer = document.getElementById('carouselSlides');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const currentSlideSpan = document.getElementById('currentSlide');
+      const totalSlidesSpan = document.getElementById('totalSlides');
+
+      totalSlidesSpan.textContent = slides.length;
+
+      function updateCarousel() {
+        const translateX = -currentSlide * 100;
+        slidesContainer.style.transform = `translateX(${translateX}%)`;
+
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+          indicator.classList.toggle('active', index === currentSlide);
+        });
+
+        // Update counter
+        currentSlideSpan.textContent = currentSlide + 1;
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateCarousel();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateCarousel();
+      }
+
+      function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+      }
+
+      // Event listeners
+      nextBtn.addEventListener('click', nextSlide);
+      prevBtn.addEventListener('click', prevSlide);
+
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => goToSlide(index));
+      });
+
+      // Auto-play (optional - uncomment to enable)
+      // setInterval(nextSlide, 5000);
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+      });
+
+      // Touch/swipe support for mobile
+      let startX = 0;
+      let endX = 0;
+
+      slidesContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+      });
+
+      slidesContainer.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        const difference = startX - endX;
+
+        if (Math.abs(difference) > 50) { // Minimum swipe distance
+          if (difference > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+      });
+    }
+
+    function setupScrollAnimations() {
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.section-title, .detail-item, .story-text, .story-image, .rsvp-form, .photo-carousel').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Staggered animations
+      const photoItems = document.querySelectorAll('.photo-item');
+      photoItems.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 0.1}s`;
+      });
+
+      const detailItems = document.querySelectorAll('.detail-item');
+      detailItems.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 0.2}s`;
+      });
+    }
+
+    function setupNavigation() {
+      const nav = document.getElementById('nav');
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          nav.classList.add('visible');
+        } else {
+          nav.classList.remove('visible');
+        }
+      });
+    }
+
+    function setupSmoothScrolling() {
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+
+          if (targetSection) {
+            const offsetTop = targetSection.offsetTop - 80;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+
+    function setupRSVP() {
+      const radioOptions = document.querySelectorAll('.radio-option');
+      const form = document.getElementById('rsvpForm');
+
+      radioOptions.forEach(option => {
+        option.addEventListener('click', function () {
+          const value = this.dataset.value;
+          const input = this.querySelector('input');
+
+          radioOptions.forEach(opt => opt.classList.remove('selected'));
+          this.classList.add('selected');
+          input.checked = true;
+
+          const guestCountGroup = document.getElementById('guestCountGroup');
+          const dietaryGroup = document.getElementById('dietaryGroup');
+
+          if (value === 'yes') {
+            slideDown(guestCountGroup);
+            slideDown(dietaryGroup);
+          } else {
+            slideUp(guestCountGroup);
+            slideUp(dietaryGroup);
+          }
+        });
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        console.log('RSVP Data:', data);
+
+        this.style.transition = 'all 0.5s ease';
+        this.style.opacity = '0';
+        this.style.transform = 'translateY(-20px)';
+
+        setTimeout(() => {
+          this.style.display = 'none';
+          document.getElementById('successMessage').style.display = 'block';
+        }, 500);
+      });
+    }
+
+    function slideDown(element) {
+      element.style.display = 'block';
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(-15px)';
+
+      setTimeout(() => {
+        element.style.transition = 'all 0.4s ease';
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+      }, 50);
+    }
+
+    function slideUp(element) {
+      element.style.transition = 'all 0.3s ease';
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(-15px)';
+
+      setTimeout(() => {
+        element.style.display = 'none';
+      }, 300);
+    }
+  </script>
+</body>
+
+</html>
