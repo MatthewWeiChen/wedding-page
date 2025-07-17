@@ -778,6 +778,32 @@
             font-style: italic;
             margin-top: 2rem;
         }
+        @media (max-width: 768px) {
+    /* ... other mobile styles ... */
+    
+    /* Mobile Countdown Adjustments */
+    .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);  /* 2x2 grid instead of 1x4 */
+        gap: 1.5rem;                            /* Smaller gap */
+    }
+
+    .countdown-number {
+        font-size: 2.2rem;                     /* Smaller numbers */
+    }
+
+    .countdown-item {
+        padding: 1rem 0.5rem;                  /* Less padding */
+    }
+
+    .countdown-title {
+        font-size: 1.8rem;                     /* Smaller title */
+    }
+
+    .countdown-subtitle {
+        font-size: 1rem;                       /* Smaller subtitle */
+        margin-bottom: 2rem;
+    }
+}
   </style>
 </head>
 
@@ -821,9 +847,8 @@
                 alt="The Proposal" class="slide-image">
               <div class="slide-content">
                 <h3 class="slide-title">The Proposal</h3>
-                <p class="slide-description">A perfect moment during our sunset hike in Marin County. Michael had been
-                  carrying the ring for two months, waiting for the right time.</p>
-                <p class="slide-date">March 2024</p>
+                <p class="slide-description">A perfect moment during our trip to Chicago. Matt has been carrying the ring for two months and that moment came at Sears Tower</p>
+                <p class="slide-date">September 2023</p>
               </div>
             </div>
 
@@ -832,9 +857,8 @@
                 alt="First Date" class="slide-image">
               <div class="slide-content">
                 <h3 class="slide-title">First Date</h3>
-                <p class="slide-description">Celebrating our engagement with a romantic dinner in Napa Valley. The
-                  beginning of our wedding planning adventure.</p>
-                <p class="slide-date">April 2024</p>
+                <p class="slide-description">Weekend getaway at Malibu. We were able to disconnect from the world and enjoy the moment.</p>
+                <p class="slide-date">Jan 2021</p>
               </div>
             </div>
 
@@ -914,7 +938,6 @@
       <h2 class="section-title">Our Story</h2>
       <div class="story-grid">
         <div class="story-text">
-          <h2>How We Met</h2>
           <p>People love to ask us how we met — probably expecting some epic, love-at-first-sight movie moment. The truth? It was
           slightly less cinematic and a bit more... awkward..</p>
           <p>We have known of each other's existence for years. But we had minimal contact with each other and I swear she thought I was annoying. However,at the height of the pandemic she caught covid and because she was one of the first person I knew who caught it. I was worried.</p>
@@ -987,7 +1010,7 @@
           </div>
         </div>
     
-        <p class="countdown-message">Until we say "I do" in beautiful Napa Valley</p>
+        <p class="countdown-message">Until we say "I do" in beautiful Laguna Hills</p>
       </div>
   </section>
 
@@ -1085,7 +1108,7 @@
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
             // Add leading zeros and animation
-            daysElement.textContent = days.toString().padStart(3, '0');
+            daysElement.textContent = days.toString().padStart(2, '0');
             hoursElement.textContent = hours.toString().padStart(2, '0');
             minutesElement.textContent = minutes.toString().padStart(2, '0');
             secondsElement.textContent = seconds.toString().padStart(2, '0');
@@ -1102,7 +1125,7 @@
             minutesElement.textContent = '00';
             secondsElement.textContent = '00';
 
-            document.querySelector('.countdown-message').textContent = '🎉 Today is our wedding day! 🎉';
+            document.querySelector('.countdown-message').textContent = 'Today is our wedding day!';
           }
         }
 
