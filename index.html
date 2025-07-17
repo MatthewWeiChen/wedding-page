@@ -389,7 +389,7 @@
     }
 
     .story-image img {
-      width: 100%;
+      width: 150%;
       height: 500px;
       object-fit: cover;
       border: 1px solid #eee;
@@ -695,6 +695,89 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* Countdown */
+    .countdown-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://res.cloudinary.com/dyffaqass/image/upload/v1752722579/IMG_20250716_201401_305_fwmfdl.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .countdown-content {
+            max-width: 800px;
+            margin: 0 auto;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .countdown-content.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .countdown-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .countdown-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .countdown-number {
+            font-size: 2.8rem;
+            font-weight: 300;
+            display: block;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+        }
+
+        .countdown-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .countdown-message {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+            margin-top: 2rem;
+        }
   </style>
 </head>
 
@@ -734,7 +817,7 @@
 
           <div class="carousel-slides" id="carouselSlides">
             <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&h=500&fit=crop&q=80"
+              <img src="https://res.cloudinary.com/dyffaqass/image/upload/v1752722579/IMG_20250716_202021_843_eoobok.jpg"
                 alt="The Proposal" class="slide-image">
               <div class="slide-content">
                 <h3 class="slide-title">The Proposal</h3>
@@ -745,10 +828,10 @@
             </div>
 
             <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1594736797933-d0fa71d3494f?w=600&h=500&fit=crop&q=80"
-                alt="Date Night" class="slide-image">
+              <img src="https://res.cloudinary.com/dyffaqass/image/upload/v1752722579/IMG_20250716_200701_997_hkvpry.jpg"
+                alt="First Date" class="slide-image">
               <div class="slide-content">
-                <h3 class="slide-title">Date Night</h3>
+                <h3 class="slide-title">First Date</h3>
                 <p class="slide-description">Celebrating our engagement with a romantic dinner in Napa Valley. The
                   beginning of our wedding planning adventure.</p>
                 <p class="slide-date">April 2024</p>
@@ -756,10 +839,10 @@
             </div>
 
             <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=500&fit=crop&q=80"
+              <img src="https://res.cloudinary.com/dyffaqass/image/upload/v1752722579/IMG_20250716_202000_832_dz2oik.jpg"
                 alt="Adventure" class="slide-image">
               <div class="slide-content">
-                <h3 class="slide-title">Weekend Adventure</h3>
+                <h3 class="slide-title">Weekend Adventure in Chicago</h3>
                 <p class="slide-description">Our getaway to Big Sur, where we love to disconnect from the world and
                   enjoy each other's company in nature.</p>
                 <p class="slide-date">July 2024</p>
@@ -767,10 +850,10 @@
             </div>
 
             <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&h=500&fit=crop&q=80"
+              <img src="https://res.cloudinary.com/dyffaqass/image/upload/v1752722579/IMG_20250716_200839_565_nyguwl.jpg"
                 alt="Celebration" class="slide-image">
               <div class="slide-content">
-                <h3 class="slide-title">Birthday Celebration</h3>
+                <h3 class="slide-title">Hiking date</h3>
                 <p class="slide-description">Sarah's surprise birthday party that Michael planned. The joy on her face
                   made all the secret planning worth it.</p>
                 <p class="slide-date">September 2024</p>
@@ -832,16 +915,19 @@
       <div class="story-grid">
         <div class="story-text">
           <h2>How We Met</h2>
-          <p>We first crossed paths on a rainy Tuesday at a small coffee shop in downtown San Francisco. Sarah was
-            pretending to grade papers but actually people-watching, while Michael was deep in a Hemingway novel.</p>
-          <p>Three years later, during a sunset hike in Marin County, Michael got down on one knee with a ring he'd been
-            carrying for two months, waiting for the perfect moment.</p>
+          <p>People love to ask us how we met — probably expecting some epic, love-at-first-sight movie moment. The truth? It was
+          slightly less cinematic and a bit more... awkward..</p>
+          <p>We have known of each other's existence for years. But we had minimal contact with each other and I swear she thought I was annoying. However,at the height of the pandemic she caught covid and because she was one of the first person I knew who caught it. I was worried.</p>
+          <p>From there we would exchange messages and eventually started to bring up each other's hobbies. One of the mutual hobbies we had was hiking. And of course because she wears the pants - she asked me to go hiking with her.</p>
+          <p>Our first conversation was a chaotic mix of small talk, sarcasm, and me trying way too hard to be funny. Somehow, she
+          laughed — which either meant she had a great sense of humor or extremely low standards. But that
+          moment turned into another conversation… then a coffee… then hours of texting, and before we knew it, we just clicked.</p>
           <div class="divider"></div>
-          <p>Now we're ready to start our next adventure together, and we can't wait to celebrate with all the people we
-            love most.</p>
+          <p>Now here we are. And to this day, we still debate who made the first move — though we both agree Erika had the better
+          pick-up line.</p>
         </div>
         <div class="story-image">
-          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&h=600&fit=crop&q=80"
+          <img src="https://res.cloudinary.com/dyffaqass/image/upload/v1752722579/IMG_20250716_201757_465_ok61wz.jpg"
             alt="Erika & Matthew">
         </div>
       </div>
@@ -875,6 +961,34 @@
        
       </div>
     </div>
+  </section>
+  <!-- Countdown Section -->
+  <section class="countdown-section">
+      <div class="countdown-content">
+        <h2 class="countdown-title">We're Getting Married!</h2>
+        <p class="countdown-subtitle">Join us in counting down to our special day</p>
+    
+        <div class="countdown-grid" id="countdown">
+          <div class="countdown-item">
+            <span class="countdown-number" id="days">000</span>
+            <span class="countdown-label">Days</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="hours">00</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="minutes">00</span>
+            <span class="countdown-label">Minutes</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="seconds">00</span>
+            <span class="countdown-label">Seconds</span>
+          </div>
+        </div>
+    
+        <p class="countdown-message">Until we say "I do" in beautiful Napa Valley</p>
+      </div>
   </section>
 
   <!-- RSVP Section -->
@@ -950,7 +1064,58 @@
       setupRSVP();
       setupSmoothScrolling();
       setupCarousel();
+      setupCountdown();
     }
+     function setupCountdown() {
+        const weddingDate = new Date('August 16, 2025 13:40:00').getTime();
+
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const timeLeft = weddingDate - now;
+
+          if (timeLeft > 0) {
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Add leading zeros and animation
+            daysElement.textContent = days.toString().padStart(3, '0');
+            hoursElement.textContent = hours.toString().padStart(2, '0');
+            minutesElement.textContent = minutes.toString().padStart(2, '0');
+            secondsElement.textContent = seconds.toString().padStart(2, '0');
+
+            // Add pulse animation to seconds
+            secondsElement.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+              secondsElement.style.transform = 'scale(1)';
+            }, 100);
+          } else {
+            // Wedding day has arrived!
+            daysElement.textContent = '000';
+            hoursElement.textContent = '00';
+            minutesElement.textContent = '00';
+            secondsElement.textContent = '00';
+
+            document.querySelector('.countdown-message').textContent = '🎉 Today is our wedding day! 🎉';
+          }
+        }
+
+        // Update immediately and then every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Add transition effects to countdown numbers
+        const countdownNumbers = document.querySelectorAll('.countdown-number');
+        countdownNumbers.forEach(number => {
+          number.style.transition = 'transform 0.1s ease';
+        });
+      }
 
     function setupCarousel() {
       let currentSlide = 0;
@@ -1045,7 +1210,7 @@
         });
       }, observerOptions);
 
-      document.querySelectorAll('.section-title, .detail-item, .story-text, .story-image, .rsvp-form, .photo-carousel').forEach(el => {
+      document.querySelectorAll('.section-title, .detail-item, .story-text, .story-image, .rsvp-form, .countdown-content .photo-carousel').forEach(el => {
         observer.observe(el);
       });
 
