@@ -999,6 +999,7 @@
       <h2 class="section-title">RSVP</h2>
       <div class="rsvp-form">
         <form id="rsvpForm" netlify name="wedding-rsvp" method="POST">
+          <input type="hidden" name="form-name" value="wedding-rsvp" />
           <div class="form-group">
             <label for="guestName">Full Name</label>
             <input type="text" id="guestName" name="guestName" required>
@@ -1295,10 +1296,26 @@
         this.style.opacity = '0';
         this.style.transform = 'translateY(-20px)';
 
-        setTimeout(() => {
-          this.style.display = 'none';
-          document.getElementById('successMessage').style.display = 'block';
-        }, 500);
+         fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString()
+        })
+          .then(() => {
+            // Hide form and show success message
+            this.style.transition = 'all 0.5s ease';
+            this.style.opacity = '0';
+            this.style.transform = 'translateY(-20px)';
+
+            setTimeout(() => {
+              this.style.display = 'none';
+              document.getElementById('successMessage').style.display = 'block';
+            }, 500);
+          })
+          .catch((error) => {
+            console.error('Form submission error:', error);
+            alert('There was an error submitting your RSVP. Please try again.');
+          });
       });
     }
 
